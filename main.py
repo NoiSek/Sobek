@@ -5,7 +5,7 @@ def generate_schedule():
   config = None
   plants = None
 
-  with open('config', 'r') as __config:
+  with open('config.json', 'r') as __config:
     with open('plants.json', 'r') as __plants:
       config = json.loads(__config.read())
       plants = json.loads(__plants.read()).get("plants")
@@ -14,7 +14,8 @@ def generate_schedule():
   month, day, year = [int(x) for x in epoch.split("/")]
   epoch = datetime.date(year, month, day)
 
-  todays_date = datetime.date.today()
+  #todays_date = datetime.date.today()
+  todays_date = datetime.date(2016, 5, 6)
 
   water_today = []
   water_tomorrow = []
@@ -23,6 +24,7 @@ def generate_schedule():
   for plant in plants:
     delta = (todays_date - epoch).days
     cycle = int(plant.get("water_cycle"))
+    print(delta % cycle)
 
     if (delta % cycle) == 0:
       water_today.append(plant)

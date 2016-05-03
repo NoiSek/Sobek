@@ -4,148 +4,165 @@
       "ID": "A1",
       "name": "Hawaiian Elf",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
+      "fertilizer_cycle": "15",
       "location": "Office"
     },
     {
       "ID": "A2",
       "name": "Little Feather",
       "water_cycle": "3",
-      "fertilizer_cycle": "",
+      "fertilizer_cycle": "15",
       "location": "Office"
     },
     {
       "ID": "A3",
       "name": "Succulents",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Office"
+      "fertilizer_cycle": "21",
+      "location": "Office",
+      "details": "Dilute heavily, 1/8tsp per gallon."
     },
     {
       "ID": "B1",
       "name": "Croton",
       "water_cycle": "3",
-      "fertilizer_cycle": "",
+      "fertilizer_cycle": "30",
       "location": "Bedroom"
     },
     {
       "ID": "B2",
       "name": "Snake",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Bedroom"
+      "fertilizer_cycle": "180",
+      "location": "Bedroom",
+      "details": "Fertilize once every spring."
     },
     {
       "ID": "B3",
       "name": "Snake",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Bedroom"
+      "fertilizer_cycle": "180",
+      "location": "Bedroom",
+      "details": "Fertilize once every spring."
     },
     {
       "ID": "B4",
       "name": "Snake",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Bedroom (Bath)"
+      "fertilizer_cycle": "180",
+      "location": "Bedroom (Bath)",
+      "details": "Fertilize once every spring."
     },
     {
       "ID": "C1",
       "name": "So Sweet",
       "water_cycle": "3",
-      "fertilizer_cycle": "",
+      "fertilizer_cycle": "15",
       "location": "Living Room"
     },
     {
       "ID": "C2",
       "name": "Weeping Fig",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Living Room"
+      "fertilizer_cycle": "30",
+      "location": "Living Room",
+      "details": "Fertilize monthly only during spring and summer"
     },
     {
       "ID": "C3",
       "name": "Ivy",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Living Room"
+      "fertilizer_cycle": "30",
+      "location": "Living Room",
+      "details": "Fertilize only during summer, spring, and fall."
     },
     {
       "ID": "C4",
       "name": "Ivy",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Living Room"
+      "fertilizer_cycle": "30",
+      "location": "Living Room",
+      "details": "Fertilize only during summer, spring, and fall."
     },
     {
       "ID": "C5",
       "name": "Ivy",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Living Room"
+      "fertilizer_cycle": "30",
+      "location": "Living Room",
+      "details": "Fertilize only during summer, spring, and fall."
     },
     {
       "ID": "C6",
       "name": "Mother In Law's Tongue",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Living Room"
+      "fertilizer_cycle": "180",
+      "location": "Living Room",
+      "details": "Fertilize once every spring."
     },
     {
       "ID": "C7",
       "name": "Aloe",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Living Room"
+      "fertilizer_cycle": "21",
+      "location": "Living Room",
+      "details": "Dilute heavily, 1/8tsp per gallon."
     },
     {
       "ID": "C8",
       "name": "Ivy",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Living Room"
+      "fertilizer_cycle": "30",
+      "location": "Living Room",
+      "details": "Fertilize only during summer, spring, and fall."
     },
     {
       "ID": "C9",
       "name": "Spider Plant",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Living Room"
+      "fertilizer_cycle": "15",
+      "location": "Living Room",
+      "details": "Fertilize bi-monthly during the summer, spring."
     },
     {
       "ID": "C10",
       "name": "Air Plant",
       "water_cycle": "14",
-      "fertilizer_cycle": "",
-      "location": "Living Room"
+      "fertilizer_cycle": "42",
+      "location": "Living Room",
+      "details": "Dilute heavily, 1/8tsp per gallon."
     },
     {
       "ID": "D1",
       "name": "Succulent",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Kitchen"
+      "fertilizer_cycle": "21",
+      "location": "Kitchen",
+      "details": "Dilute heavily, 1/8tsp per gallon."
     },
     {
       "ID": "D2",
       "name": "Ivy",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Kitchen"
+      "fertilizer_cycle": "30",
+      "location": "Kitchen",
+      "details": "Fertilize only during summer, spring, and fall."
     },
     {
       "ID": "D3",
       "name": "African Violet",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Kitchen"
+      "fertilizer_cycle": "30",
+      "location": "Kitchen",
+      "details": "Dilute heavily, 1/8tsp per gallon."
     },
     {
       "ID": "D4",
       "name": "Closet Plant",
       "water_cycle": "7",
-      "fertilizer_cycle": "",
-      "location": "Kitchen"
+      "fertilizer_cycle": "30",
+      "location": "Kitchen",
+      "details": "Dilute to 1/4th recommended fertilizer."
     }
   ]
 }
