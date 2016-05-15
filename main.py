@@ -1,54 +1,83 @@
-import datetime
-import json
+#! /usr/bin/env python3
+from threading import Thread, Event
+from models.Sobek import Sobek
 
-def generate_schedule():
-  config = None
-  plants = None
+#import curses
+import queue
+import time
 
-  with open('config.json', 'r') as __config:
-    with open('plants.json', 'r') as __plants:
-      config = json.loads(__config.read())
-      plants = json.loads(__plants.read()).get("plants")
+def render_interface(events, terminate, window, app, init):
+  log = []
 
-  epoch = config.get("epoch")
-  month, day, year = [int(x) for x in epoch.split("/")]
-  epoch = datetime.date(year, month, day)
+  while not terminate.is_set():
+    if init is not True:
+      latest = events.get(block=True)
+      log.append(latest)
+      events.task_done()
+    else:
+      init = False
 
-  #todays_date = datetime.date.today()
-  todays_date = datetime.date(2016, 5, 6)
+    log = log[-10:]
 
-  water_today = []
-  water_tomorrow = []
-  water_soon = []
+    window.clear()
+    height, width = window.getmaxyx()
+    window.addstr(0, 0, "Currently monitoring {} plants.".format(len(app.plants)))
+    window.hline(1, 0, b"#", width - 1)
+    window.addstr(2, 0, "Q - Exit, F - Force update")
+    window.addstr(4, 0, "\n".join(log))
 
-  for plant in plants:
-    delta = (todays_date - epoch).days
-    cycle = int(plant.get("water_cycle"))
-    print(delta % cycle)
+def take_input(events, terminate, window, app):
+  while not terminate.is_set():
+    try:
+      action = window.getkey()
 
-    if (delta % cycle) == 0:
-      water_today.append(plant)
-      print("{}: {} needs to be watered today.".format(
-          plant.get("ID"),
-          plant.get("name")
-        )
-      )
+      if action.lower() == "q":
+        events.put("{} - User exit.".format(time.strftime("%X")))
+        terminate.set()
 
-    if (delta % cycle) == (cycle - 1):
-      water_tomorrow.append(plant)
-      print("{}: {} needs to be watered tomorrow.".format(
-          plant.get("ID"),
-          plant.get("name")
-        )
-      )
+      elif action.lower() == "f":
+        curses.flash()
+        events.put("{} - Forced update.".format(time.strftime("%X")))
+        app.force_update()
 
-    if (delta % cycle) == (cycle - 2):
-      water_soon.append(plant)
-      print("{}: {} needs to be watered soon.".format(
-          plant.get("ID"),
-          plant.get("name")
-        )
-      )
+    except Exception:
+      pass
+
+def main(window):
+  window.clear()
+  window.nodelay(1)
+
+  events = queue.Queue()
+  terminate = Event()
+
+  app = Sobek(events)
+  app.init()
   
+  interface = Thread(target=render_interface, args=(events, terminate, window, app, True))
+  user_input = Thread(target=take_input, args=(events, terminate, window, app))
+
+  interface.start()
+  user_input.start()
+
+  while not terminate.is_set():
+    window.refresh()
+
+  window.clear()
+  window.refresh()
+
+  interface.join()
+  user_input.join()
+
 if __name__ == "__main__":
-  generate_schedule()
+  #curses.wrapper(main)
+  #curses.clear()
+  #curses.endwin()
+
+  events = queue.Queue()
+  terminate = Event()
+
+  app = Sobek(events)
+  app.init()
+
+  while True:
+    pass

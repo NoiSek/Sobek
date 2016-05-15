@@ -1,10 +1,14 @@
-from PIL import Image, ImageChops, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont
+from utils import load_config, trim
 from functools import lru_cache
 
 import datetime
 import json
 
 class PlantCard:
+  """Represent plant objects as PIL.Image instances, calculate
+  and return rendered images.
+  """
   def __init__(self, data):
     self.droplet, self.leaf = PlantCard.__get_base_icons()
     self.data = data
@@ -12,12 +16,7 @@ class PlantCard:
   @staticmethod
   @lru_cache(maxsize=None)
   def __get_config():
-    config = None
-
-    with open('config', 'r') as __config:
-      config = json.loads(__config.read())
-
-    return config
+    return load_config()
 
   @staticmethod
   @lru_cache(maxsize=None)
@@ -36,14 +35,9 @@ class PlantCard:
     return (droplet, leaf)
 
   @staticmethod
+  #@lru_cache(maxsize=None)
   def __trim(image):
-    background = Image.new(image.mode, image.size, image.getpixel((0,0)))
-    difference = ImageChops.difference(image, background)
-    difference = ImageChops.add(difference, difference, 2.0, -100)
-    bbox = difference.getbbox()
-    
-    if bbox:
-      return image.crop(bbox)
+    return trim(image)
 
   def generate_fertilizer_cycle(self):
     config = PlantCard.__get_config()
@@ -90,30 +84,30 @@ class PlantCard:
   def generate_image(self, font):
     base_card = Image.new('1', (170, 250))
     
-    # Generate days until next watering, days until next fertilizing
+    ## Generate days until next watering, days until next fertilizing
     water_date = self.generate_water_cycle()
     fertilize_date = self.generate_fertilizer_cycle()
 
-    # Calculate fertilizing timer position based on width
+    ## Calculate fertilizing timer position based on width
     fertilize_x_pos = (base_card.size[0] - fertilize_date.size[0]) - 10
 
-    # Place watering timer, fertilizer timer
+    ## Place watering timer, fertilizer timer
     base_card.paste(water_date, (10, 220))
     base_card.paste(fertilize_date, (fertilize_x_pos, 220))
 
-    # Center and draw ID
+    ## Center and draw ID
     draw_context = ImageDraw.Draw(base_card)
     
     id_text_width, id_text_height = draw_context.textsize(self.data.get("ID"), font)
     id_x_pos = (base_card.size[0] / 2) - (id_text_width / 2)
 
-    draw_context.text((id_x_pos, 25), self.data.get("ID"), font=font, fill=255)
+    draw_context.text(xy=(id_x_pos, 25), text=self.data.get("ID"), font=font, fill=255)
 
-    # Center and draw name
+    ## Center and draw name
     name_text_width, name_text_height = draw_context.textsize(self.data.get("name"), PlantCard.__get_base_font(15))
     name_x_pos = (base_card.size[0] / 2) - (name_text_width / 2)
     name_y_pos = id_text_height + 10 + 25
-    draw_context.text((name_x_pos, name_y_pos), self.data.get("name"), font=PlantCard.__get_base_font(15), fill=255)
+    draw_context.text(xy=(name_x_pos, name_y_pos), text=self.data.get("name"), font=PlantCard.__get_base_font(15), fill=255)
 
     return base_card
 
