@@ -79,5 +79,9 @@ if __name__ == "__main__":
   app = Sobek(events)
   app.init()
 
-  while True:
-    pass
+  try:
+    while not terminate.is_set():
+      time.sleep(60)
+      
+  except KeyboardInterrupt:
+    terminate.set()

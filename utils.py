@@ -96,9 +96,8 @@ def write_image(image):
 
     try:
       epdfile.write(payload)
-      ImageChops.invert(image).save(os.path.join(config.get("output_dir"), "preview.png"))
+      ImageChops.invert(image).save(os.path.join("output", "preview.png"))
 
-      return True
     except (IOError, OSError):
       print("Error writing output image to epd file.")
       raise

@@ -28,6 +28,7 @@ class Sobek():
     self.render_weather(self.image)
     
     self.alpha_timer = Timer(float(self.config.get("plant_update_interval_hours")) * 3600.0, self.__cycle_primary)
+    self.alpha_timer.start()
 
   def __cycle_secondary(self):
     self._image = self.image.copy()
@@ -47,6 +48,7 @@ class Sobek():
 
     self.generate_image()
     self.beta_timer = Timer(60.0, self.__cycle_secondary)
+    self.beta_timer.start()
 
   def generate_image(self):
     image = ImageChops.invert(self._image)

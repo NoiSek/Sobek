@@ -143,7 +143,7 @@ class WeatherState:
 
     ## Draw conditions description and wind speed.
     description_and_wind = "{}.\n{} winds at {} / {} MPH.".format(
-      self.state['current_observation']['weather'],
+      self.state['current_observation']['weather'].split(".")[0],
       self.state['current_observation']['wind_dir'],
       self.state['current_observation']['wind_mph'],
       self.state['current_observation']['wind_gust_mph']
@@ -216,10 +216,12 @@ class WeatherState:
     return ImageChops.invert(icon)
 
   def update(self):
-    response = urllib.request.urlopen(self.api_string)
+    #response = urllib.request.urlopen(self.api_string)
 
-    if response.getcode() == 200:
-      self.state = json.loads(response.read().decode('utf-8'))
+    #if response.getcode() == 200:
+    #  self.state = json.loads(response.read().decode('utf-8'))
+    with open('blank.json', 'r') as f:
+      self.state = json.loads(f.read())
 
   def __repr__(self):
     return("<WeatherState {},{}>".format(
